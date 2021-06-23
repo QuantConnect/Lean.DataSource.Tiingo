@@ -15,6 +15,7 @@
 */
 
 using System;
+using System.Collections.Generic;
 using ProtoBuf;
 using System.IO;
 using System.Linq;
@@ -27,7 +28,7 @@ using QuantConnect.DataSource;
 namespace QuantConnect.DataLibrary.Tests
 {
     [TestFixture]
-    public class MyCustomDataTypeTests
+    public class TiingoNewsTests
     {
         [Test]
         public void JsonRoundTrip()
@@ -87,12 +88,25 @@ namespace QuantConnect.DataLibrary.Tests
 
         private BaseData CreateNewInstance()
         {
-            return new MyCustomDataType
+            return new TiingoNews
             {
                 Symbol = Symbol.Empty,
                 Time = DateTime.Today,
                 DataType = MarketDataType.Base,
-                SomeCustomProperty = "This is some market related information"
+
+                Source = "https://www.quantconnect.com",
+                CrawlDate = new DateTime(2020, 1, 1),
+                Url = "https://www.quantconnect.com/blog/something-new-here",
+                PublishedDate = new DateTime(2020, 1, 1),
+                Tags = new List<string> { "awesome", "cool", "pepe grillo" },
+                Title = "Announcing cool new stuff",
+                Description = "Cool new stuff being presented here",
+                ArticleID = "0xabcdef0123456789",
+                Symbols = new List<Symbol> 
+                {
+                    Symbol.Create("AAPL", SecurityType.Equity, Market.USA),
+                    Symbol.Create("SPY", SecurityType.Equity, Market.USA)
+                }
             };
         }
     }
