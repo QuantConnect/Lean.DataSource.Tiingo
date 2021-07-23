@@ -20,7 +20,17 @@
     <Compile Remove="tests\**" />
     <EmbeddedResource Remove="tests\**" />
     <None Remove="tests\**" />
+    <Compile Remove="DataQueueHandlers\**" />
+    <EmbeddedResource Remove="DataQueueHandlers\**" />
+    <None Remove="DataQueueHandlers\**" />
+    <Compile Remove="DataProcessing\**" />
+    <EmbeddedResource Remove="DataProcessing\**" />
+    <None Remove="DataProcessing\**" />
     <Compile Remove="Demonstration.cs" />
+    <Compile Remove="TiingoNewsAlgorithm.cs" />
+    <Compile Remove="CoarseTiingoNewsUniverseSelectionAlgorithm.cs" />
+    <None Remove="CoarseTiingoNewsUniverseSelectionAlgorithm.py" />
+    <None Remove="TiingoNewsAlgorithm.py" />
     <None Remove=".gitignore" />
     <None Remove="process.sample.ipynb" />
     <None Remove="process.sample.py" />
