@@ -5,6 +5,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="..\Demonstration.cs" Link="Demonstration.cs" />
+    <Compile Include="..\CoarseTiingoNewsUniverseSelectionAlgorithm.cs" Link="CoarseTiingoNewsUniverseSelectionAlgorithm.cs" />
+    <Compile Include="..\TiingoNewsAlgorithm.cs" Link="TiingoNewsAlgorithm.cs" />
+    <None Include="..\CoarseTiingoNewsUniverseSelectionAlgorithm.py" Link="CoarseTiingoNewsUniverseSelectionAlgorithm.py" />
+    <None Include="..\TiingoNewsAlgorithm.py" Link="TiingoNewsAlgorithm.py" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="protobuf-net" Version="3.0.29" />
@@ -19,5 +23,6 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\QuantConnect.DataSource.csproj" />
+    <ProjectReference Include="..\DataProcessing\DataProcessing.csproj" />
   </ItemGroup>
 </Project>

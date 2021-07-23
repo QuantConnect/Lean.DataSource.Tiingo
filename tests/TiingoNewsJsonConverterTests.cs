@@ -26,6 +26,9 @@ namespace QuantConnect.Tests.Common.Data.Custom
     [TestFixture]
     public class TiingoNewsJsonConverterTests
     {
+        private static Symbol SymbolAAPL = Symbol.Create("AAPL", SecurityType.Equity, Market.USA);
+        private static Symbol SymbolSPY = Symbol.Create("SPY", SecurityType.Equity, Market.USA);
+
         [Test]
         public void DeserializeCorrectly()
         {
@@ -51,7 +54,7 @@ namespace QuantConnect.Tests.Common.Data.Custom
     ""time"":""2019-01-29T23:20:01.696871Z""
 }]";
             var result = JsonConvert.DeserializeObject<List<TiingoNews>>(content,
-                new TiingoNewsJsonConverter(Symbols.SPY));
+                new TiingoNewsJsonConverter(SymbolSPY));
 
             Assert.AreEqual("2", result[0].ArticleID);
             Assert.AreEqual(
@@ -78,10 +81,10 @@ namespace QuantConnect.Tests.Common.Data.Custom
             Assert.AreEqual("description", result[1].Description);
             Assert.AreEqual("source", result[1].Source);
             Assert.AreEqual(new List<string> { "tag1", "tag2" }, result[1].Tags);
-            Assert.AreEqual(new List<Symbol> { Symbols.AAPL }, result[1].Symbols);
+            Assert.AreEqual(new List<Symbol> { SymbolAAPL }, result[1].Symbols);
             Assert.AreEqual("title", result[1].Title);
             Assert.AreEqual("url", result[1].Url);
-            Assert.AreEqual(Symbols.SPY, result[1].Symbol);
+            Assert.AreEqual(SymbolSPY, result[1].Symbol);
             Assert.AreEqual(result[1].PublishedDate.Add(TiingoNewsConverter.HistoricalCrawlOffset), result[1].Time);
             Assert.AreEqual(result[1].PublishedDate.Add(TiingoNewsConverter.HistoricalCrawlOffset), result[1].EndTime);
         }
@@ -108,7 +111,7 @@ namespace QuantConnect.Tests.Common.Data.Custom
             content += @"}]";
 
             var result = JsonConvert.DeserializeObject<List<TiingoNews>>(content,
-                new TiingoNewsJsonConverter(Symbols.SPY));
+                new TiingoNewsJsonConverter(SymbolSPY));
 
             if (liveMode)
             {
@@ -127,7 +130,7 @@ namespace QuantConnect.Tests.Common.Data.Custom
             var settings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
 
             var crawlDate = new DateTime(2020, 3, 19, 10, 0, 0);
-            var underlyingSymbol = Symbols.AAPL;
+            var underlyingSymbol = SymbolAAPL;
             var symbol = Symbol.CreateBase(typeof(TiingoNews), underlyingSymbol, QuantConnect.Market.USA);
             var symbolList = new List<Symbol> { underlyingSymbol };
             var tags = new List<string> { "Stock", "Technology" };
@@ -172,7 +175,7 @@ namespace QuantConnect.Tests.Common.Data.Custom
 }]";
 
             Assert.DoesNotThrow(()=>JsonConvert.DeserializeObject<List<TiingoNews>>(content,
-                new TiingoNewsJsonConverter(Symbols.SPY)));
+                new TiingoNewsJsonConverter(SymbolSPY)));
 
         }
     }
