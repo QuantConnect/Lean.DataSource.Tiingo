@@ -13,6 +13,8 @@
  * limitations under the License.
 */
 
+using ProtoBuf;
+using ProtoBuf.Meta;
 using Newtonsoft.Json;
 using QuantConnect.Configuration;
 using QuantConnect.Data;
@@ -50,6 +52,8 @@ namespace QuantConnect.DataSource.DataQueueHandlers
         /// </summary>
         public TiingoNewsDataQueueHandler()
         {
+            RuntimeTypeModel.Default[typeof(BaseData)].AddSubType(TiingoNews.DataSourceId, typeof(TiingoNews));
+
             _realTimeSchedule.ScheduleEvent(TimeSpan.FromMinutes(1), DateTime.UtcNow);
             _realTimeSchedule.NewEvent += GetLatestNews;
             _dataAggregator = Composer.Instance.GetPart<IDataAggregator>() ?? 
