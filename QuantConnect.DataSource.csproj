@@ -6,6 +6,7 @@
     <AssemblyName>QuantConnect.DataSource.TiingoNews</AssemblyName>
     <OutputPath>bin\$(Configuration)</OutputPath>
     <DocumentationFile>$(OutputPath)\QuantConnect.DataSource.TiingoNews.xml</DocumentationFile>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
 
   <ItemGroup>

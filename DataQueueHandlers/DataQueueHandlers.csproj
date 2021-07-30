@@ -4,6 +4,7 @@
     <TargetFramework>net5.0</TargetFramework>
     <RootNamespace>QuantConnect.DataSource.DataQueueHandlers</RootNamespace>
     <AssemblyName>QuantConnect.DataSource.DataQueueHandlers.TiingoNews</AssemblyName>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
 
   <ItemGroup>
