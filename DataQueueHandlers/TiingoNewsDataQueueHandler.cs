@@ -40,7 +40,7 @@ namespace QuantConnect.DataSource.DataQueueHandlers
     {
         private readonly List<Symbol> _symbolList = new List<Symbol>();
         private readonly bool _filterTicks;
-        private HashSet<Data.Custom.Tiingo.TiingoNews> _emittedNews = new HashSet<Data.Custom.Tiingo.TiingoNews>();
+        private HashSet<TiingoNews> _emittedNews = new HashSet<TiingoNews>();
         private IDataAggregator _dataAggregator;
         private readonly string _tiingoToken = Config.Get("tiingo-auth-token");
         private readonly TiingoNewsComparer _comparer = new TiingoNewsComparer();
@@ -78,10 +78,10 @@ namespace QuantConnect.DataSource.DataQueueHandlers
                 }
 
                 var utcNow = DateTime.UtcNow;
-                var lastHourNews = JsonConvert.DeserializeObject<List<Data.Custom.Tiingo.TiingoNews>>(content, new TiingoNewsJsonConverter())
+                var lastHourNews = JsonConvert.DeserializeObject<List<TiingoNews>>(content, new TiingoNewsJsonConverter())
                     .Where(n => utcNow - n.CrawlDate <= TimeSpan.FromHours(1));
 
-                _emittedNews = new HashSet<Data.Custom.Tiingo.TiingoNews>(_emittedNews.Where(n => utcNow - n.CrawlDate < TimeSpan.FromHours(3)), _comparer);
+                _emittedNews = new HashSet<TiingoNews>(_emittedNews.Where(n => utcNow - n.CrawlDate < TimeSpan.FromHours(3)), _comparer);
 
                 lock (_locker)
                 {
@@ -94,7 +94,7 @@ namespace QuantConnect.DataSource.DataQueueHandlers
                     foreach (var tiingoNewsSymbol in tiingoNews.Symbols)
                     {
                         if (_filterTicks && !_symbolList.Contains(tiingoNewsSymbol)) continue;
-                        tiingoNews.Symbol = Symbol.CreateBase(typeof(Data.Custom.Tiingo.TiingoNews), tiingoNewsSymbol, Market.USA);
+                        tiingoNews.Symbol = Symbol.CreateBase(typeof(TiingoNews), tiingoNewsSymbol, Market.USA);
                         tiingoNews.Time = tiingoNews.CrawlDate;
                         _dataAggregator.Update(tiingoNews);
                     }
@@ -167,7 +167,7 @@ namespace QuantConnect.DataSource.DataQueueHandlers
     /// IEqualityComparer implementation for Tiingo news data.
     /// </summary>
     /// <seealso cref="TiingoNews" />
-    internal class TiingoNewsComparer : IEqualityComparer<Data.Custom.Tiingo.TiingoNews>
+    internal class TiingoNewsComparer : IEqualityComparer<TiingoNews>
     {
         /// <summary>
         /// Check equality.
@@ -175,7 +175,7 @@ namespace QuantConnect.DataSource.DataQueueHandlers
         /// <param name="thisOne">The this one.</param>
         /// <param name="anotherOne">Another one.</param>
         /// <returns></returns>
-        public bool Equals(Data.Custom.Tiingo.TiingoNews thisOne, Data.Custom.Tiingo.TiingoNews anotherOne)
+        public bool Equals(TiingoNews thisOne, TiingoNews anotherOne)
         {
             return thisOne?.ArticleID == anotherOne?.ArticleID;
         }
@@ -187,7 +187,7 @@ namespace QuantConnect.DataSource.DataQueueHandlers
         /// <returns>
         /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.
         /// </returns>
-        public int GetHashCode(Data.Custom.Tiingo.TiingoNews obj)
+        public int GetHashCode(TiingoNews obj)
         {
             return obj.ArticleID.GetHashCode();
         }
