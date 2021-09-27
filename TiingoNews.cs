@@ -172,7 +172,7 @@ namespace QuantConnect.DataSource
 
                 return new SubscriptionDataSource(url,
                     SubscriptionTransportMedium.Rest,
-                    FileFormat.Collection);
+                    FileFormat.UnfoldingCollection);
             }
 
             var source = Path.Combine(
