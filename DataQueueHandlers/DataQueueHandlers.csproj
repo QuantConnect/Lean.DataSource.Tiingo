@@ -1,21 +1,21 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <RootNamespace>QuantConnect.DataSource.DataQueueHandlers</RootNamespace>
     <AssemblyName>QuantConnect.DataSource.DataQueueHandlers.TiingoNews</AssemblyName>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="QuantConnect.Common" Version="2.5.*" />
+    <PackageReference Include="QuantConnect.Lean" Version="2.5.*" />
     <PackageReference Include="protobuf-net" Version="3.0.29" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\QuantConnect.DataSource.csproj" />
-    <ProjectReference Include="..\..\Lean\Common\QuantConnect.csproj" />
-    <ProjectReference Include="..\..\Lean\Engine\QuantConnect.Lean.Engine.csproj" />
   </ItemGroup>
 
 </Project>
