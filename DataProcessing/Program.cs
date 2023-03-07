@@ -17,7 +17,7 @@ using System;
 using System.Globalization;
 using System.IO;
 using QuantConnect.Configuration;
-using QuantConnect.DataSource;
+using QuantConnect.Interfaces;
 using QuantConnect.Logging;
 using QuantConnect.Util;
 
@@ -41,6 +41,10 @@ namespace QuantConnect.DataProcessing
             
             var sourceDirectory = new DirectoryInfo(Config.Get("raw-folder", "/raw"));
             var destinationDirectory = new DirectoryInfo(Config.Get("temp-output-directory", "/temp-output-directory"));
+
+            var dataProvider = Composer.Instance.GetExportedValueByTypeName<IDataProvider>(Config.Get("data-provider", "DefaultDataProvider"));
+            var mapFileProvider = Composer.Instance.GetExportedValueByTypeName<IMapFileProvider>(Config.Get("map-file-provider", "LocalZipMapFileProvider"));
+            mapFileProvider.Initialize(dataProvider);
 
             TiingoNewsConverter instance;
             try
