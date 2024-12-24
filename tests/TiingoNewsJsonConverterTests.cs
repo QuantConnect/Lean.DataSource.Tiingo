@@ -20,12 +20,21 @@ using Newtonsoft.Json;
 using NUnit.Framework;
 using QuantConnect.DataSource;
 using QuantConnect.DataProcessing;
+using QuantConnect.Data.Auxiliary;
+using QuantConnect.Interfaces;
+using QuantConnect.Util;
 
 namespace QuantConnect.Tests.Common.Data.Custom
 {
     [TestFixture]
     public class TiingoNewsJsonConverterTests
     {
+        [OneTimeSetUp]
+        public void Setup()
+        {
+            Composer.Instance.GetExportedValueByTypeName<IMapFileProvider>(Configuration.Config.Get("map-file-provider", typeof(LocalDiskMapFileProvider).Name));
+        }
+
         private static Symbol SymbolAAPL = Symbol.Create("AAPL", SecurityType.Equity, Market.USA);
         private static Symbol SymbolSPY = Symbol.Create("SPY", SecurityType.Equity, Market.USA);
 
