@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net9.0</TargetFramework>
     <RootNamespace>QuantConnect.DataSource.DataQueueHandlers</RootNamespace>
     <AssemblyName>QuantConnect.DataSource.DataQueueHandlers.TiingoNews</AssemblyName>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
